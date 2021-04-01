@@ -13,4 +13,4 @@ def main():
     args = parser.parse_args()  # noqa: F841
     first_file = args.first_file
     second_file = args.second_file
-    return generate_diff(first_file, second_file)
+    return print(generate_diff(first_file, second_file))
