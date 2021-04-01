@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 import argparse
-from gendiff.gendiff import generate_diff
+from gendiff import parse
 
 
-def main():
+def get_files():
     parser = argparse.ArgumentParser(prog='gendiff',
                                      description='Generate diff',
                                      usage='%(prog)s [-h] [-f FORMAT] first_file second_file')  # noqa: E501
@@ -13,4 +13,4 @@ def main():
     args = parser.parse_args()  # noqa: F841
     first_file = args.first_file
     second_file = args.second_file
-    return print(generate_diff(first_file, second_file))
+    return parse.get_data(first_file), parse.get_data(second_file)
