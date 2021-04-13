@@ -9,8 +9,13 @@ def get_files():
                                      usage='%(prog)s [-h] [-f FORMAT] first_file second_file')  # noqa: E501
     parser.add_argument('first_file')
     parser.add_argument('second_file')
-    parser.add_argument('-f', '--format', help='set format of output')
+    parser.add_argument(
+        '-f', '--format',
+        default='stylish',
+        help='set format of output'
+    )
     args = parser.parse_args()  # noqa: F841
     first_file = args.first_file
     second_file = args.second_file
-    return parse.get_data(first_file), parse.get_data(second_file)
+    formatter = args.format
+    return parse.get_data(first_file), parse.get_data(second_file), formatter
