@@ -1,47 +1,44 @@
 def get_format(diff, path=''):
     node = sorted(diff.keys())
     tree = []
-    for child in node:
-        line = child if not path else '.'.join([path, child])
+    for key in node:
+        line = key if not path else '.'.join([path, key])
         format_line = '{}'.format(line)
-        if diff[child][0] == 'changed':
+        if 'changed' in diff[key].keys():
             tree.append(' '.join([
                 'Property',
                 '\'{}\''.format(format_line),
                 'was updated. From',
-                walk(diff[child][1][0]),
+                walk(diff[key]['changed'][0]),
                 'to',
-                walk(diff[child][1][1])
+                walk(diff[key]['changed'][1])
             ]))
-        elif diff[child][0] == 'added':
+        elif 'added' in diff[key].keys():
             tree.append(' '.join([
                 'Property',
                 '\'{}\''.format(format_line),
                 'was added with value:',
-                walk(diff[child][1])
+                walk(diff[key]['added'])
             ]))
-        elif diff[child][0] == 'deleted':
+        elif 'deleted' in diff[key].keys():
             tree.append(' '.join([
                 'Property',
                 '\'{}\''.format(format_line),
                 'was removed',
             ]))
-        elif diff[child][0] == 'nested':
+        elif 'nested' in diff[key].keys():
             tree.append(get_format(
-                diff[child][1],
+                diff[key]['nested'],
                 path=format_line,
             ))
     return '\n'.join(tree)
 
 
 def walk(node):
-    items = {'True': 'true', 'False': 'false', 'None': 'null'}
+    values = {'True': 'true', 'False': 'false', 'None': 'null'}
     if not isinstance(node, dict):
-        if str(node) in items.keys():
-            return items[str(node)]
+        if str(node) in values.keys():
+            return values[str(node)]
         return '\'{}\''.format(node)
-    elif isinstance(node, str):
-        return "'{}'".format(node)
-    elif isinstance(node, dict):
+    else:
         return '[complex value]'
-    return '{}'.format(node)
