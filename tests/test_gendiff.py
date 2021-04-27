@@ -1,6 +1,5 @@
 import pytest
 from gendiff.gendiff import generate_diff
-from gendiff import parse
 
 
 @pytest.mark.parametrize('file1,file2,form,expected', [
@@ -38,8 +37,6 @@ from gendiff import parse
 def test_flat_files(file1, file2, form, expected):
     with open(expected, 'r') as result:
         expected = result.read()
-    file1 = parse.get_data(file1)
-    file2 = parse.get_data(file2)
     assert generate_diff(file1, file2, form) == expected
 
 
@@ -78,6 +75,4 @@ def test_flat_files(file1, file2, form, expected):
 def test_recursion_files(file1, file2, form, expected):
     with open(expected, 'r') as result:
         expected = result.read()
-    file1 = parse.get_data(file1)
-    file2 = parse.get_data(file2)
     assert generate_diff(file1, file2, form) == expected

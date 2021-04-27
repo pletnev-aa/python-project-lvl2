@@ -1,5 +1,4 @@
 import argparse
-from gendiff import parse
 
 
 def get_files():
@@ -20,4 +19,4 @@ def get_files():
     first_file = args.first_file
     second_file = args.second_file
     formatter = args.format
-    return parse.get_data(first_file), parse.get_data(second_file), formatter
+    return first_file, second_file, formatter

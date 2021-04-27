@@ -39,6 +39,8 @@ def walk(node):
     if not isinstance(node, dict):
         if str(node) in values.keys():
             return values[str(node)]
+        elif isinstance(node, int):
+            return '{}'.format(node)
         return '\'{}\''.format(node)
     else:
         return '[complex value]'

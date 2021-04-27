@@ -54,9 +54,6 @@ def get_format(diff, tab=0):
 
 
 def get_line(indent, status, node, value):
-    if not value:
-        line = ''.join([indent * TAB, status, node, ':'])
-        return ''.join([line, str(value)])
     line = ''.join([indent * TAB, status, node, ':'])
     return ' '.join([line, str(value)])
 

@@ -10,6 +10,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.6"
+PyYAML = "^5.4.1"
 
 [tool.poetry.scripts]
 gendiff = 'gendiff.scripts.gendiff:main'
@@ -18,7 +19,6 @@ gendiff = 'gendiff.scripts.gendiff:main'
 flake8 = "^3.8.4"
 pytest-cov = "^2.11.1"
 PyYAML = "^5.4.1"
-q
 pytest = "^6.2.1"
 
 [build-system]

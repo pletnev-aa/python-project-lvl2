@@ -1,4 +1,5 @@
 from gendiff.formatter import stylish, plain, json
+from gendiff import parse
 
 FORMATS = {
     'stylish': stylish,
@@ -7,7 +8,9 @@ FORMATS = {
 }
 
 
-def generate_diff(first_data, second_data, formatter):
+def generate_diff(first_data, second_data, formatter='stylish'):
+    first_data = parse.get_data(first_data)
+    second_data = parse.get_data(second_data)
     diff = get_diff(first_data, second_data)
     return FORMATS[formatter].get_format(diff)
 
