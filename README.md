@@ -8,6 +8,16 @@
 <p>Generate the difference between the two data structures.
 Formation report in the form: plain, stylish, json. 
 </p>
+<h3>Format options</h3>
+<table>
+<tr>
+<th>option</th>
+<th>description</th>
+</tr>
+<tr><td>-- format stylish</td><td>return report in stylish form</td></tr>
+<tr><td>-- format plain</td><td>return report in plain form</td></tr>
+<tr><td>-- format json</td><td>return report in json form</td></tr>
+</table>
 <h3>Example of work:</h3>
 <ul>
 <li>Generate diff flat JSON_files in stylish form (by default selected):

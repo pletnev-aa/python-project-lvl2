@@ -4,15 +4,25 @@ from gendiff import parse
 FORMATS = {
     'stylish': stylish,
     'plain': plain,
-    'json': json
+    'json': json,
 }
 
 
 def generate_diff(first_data, second_data, formatter='stylish'):
-    first_data = parse.get_data(first_data)
-    second_data = parse.get_data(second_data)
+    first_data = parse.get_data(read_file(first_data), get_format(first_data))
+    second_data = parse.get_data(read_file(second_data), get_format(second_data))  # noqa: E501
     diff = get_diff(first_data, second_data)
     return FORMATS[formatter].get_format(diff)
+
+
+def get_format(file):
+    return file.rsplit('.', 1)[-1]
+
+
+def read_file(file):
+    with open(file, 'r') as data:
+        data_file = data.read()
+    return data_file
 
 
 def get_diff(first_data, second_data):
@@ -37,4 +47,4 @@ def get_diff(first_data, second_data):
     for key in deleted_node:
         value = {'deleted': first_data[key]}
         diff[key] = value
-    return diff
+    return dict(sorted(diff.items()))

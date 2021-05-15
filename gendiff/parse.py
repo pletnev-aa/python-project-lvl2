@@ -2,12 +2,10 @@ import yaml
 import json
 
 
-def get_data(node):
-    form = node.rsplit('.', 1)[-1]
+def get_data(file, form):
     data = {}
     if form == 'json':
-        data = json.load(open(node))
+        data = json.loads(file)
     elif form == 'yml':
-        with open(node, 'r') as data_node:
-            data = yaml.safe_load(data_node.read())
+        data = yaml.safe_load(file)
     return data

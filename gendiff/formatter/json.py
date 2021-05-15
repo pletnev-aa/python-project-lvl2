@@ -2,8 +2,7 @@ import json
 
 
 def get_format(diff):
-    node = sorted(diff.keys())
-    for key in node:
+    for key in diff.keys():
         if isinstance(diff[key], dict) and 'nested' in diff[key]:
             diff[key] = diff[key]['nested']
             get_format(diff[key])

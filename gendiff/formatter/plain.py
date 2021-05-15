@@ -1,30 +1,38 @@
+STRINGS = {
+    'property': 'Property',
+    'updated': 'was updated. From',
+    'added': 'was added with value:',
+    'deleted': 'was removed',
+    'form': '\'{}\'',
+}
+
+
 def get_format(diff, path=''):
-    node = sorted(diff.keys())
     tree = []
-    for key in node:
+    for key in diff.keys():
         line = key if not path else '.'.join([path, key])
         format_line = '{}'.format(line)
         if 'changed' in diff[key].keys():
             tree.append(' '.join([
-                'Property',
-                '\'{}\''.format(format_line),
-                'was updated. From',
-                walk(diff[key]['changed'][0]),
+                STRINGS['property'],
+                STRINGS['form'].format(format_line),
+                STRINGS['updated'],
+                to_string(diff[key]['changed'][0]),
                 'to',
-                walk(diff[key]['changed'][1])
+                to_string(diff[key]['changed'][1])
             ]))
         elif 'added' in diff[key].keys():
             tree.append(' '.join([
-                'Property',
-                '\'{}\''.format(format_line),
-                'was added with value:',
-                walk(diff[key]['added'])
+                STRINGS['property'],
+                STRINGS['form'].format(format_line),
+                STRINGS['added'],
+                to_string(diff[key]['added'])
             ]))
         elif 'deleted' in diff[key].keys():
             tree.append(' '.join([
-                'Property',
-                '\'{}\''.format(format_line),
-                'was removed',
+                STRINGS['property'],
+                STRINGS['form'].format(format_line),
+                STRINGS['deleted'],
             ]))
         elif 'nested' in diff[key].keys():
             tree.append(get_format(
@@ -34,13 +42,13 @@ def get_format(diff, path=''):
     return '\n'.join(tree)
 
 
-def walk(node):
+def to_string(node):
     values = {'True': 'true', 'False': 'false', 'None': 'null'}
     if not isinstance(node, dict):
         if str(node) in values.keys():
             return values[str(node)]
         elif isinstance(node, int):
             return '{}'.format(node)
-        return '\'{}\''.format(node)
+        return STRINGS['form'].format(node)
     else:
         return '[complex value]'
