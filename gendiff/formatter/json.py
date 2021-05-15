@@ -10,4 +10,4 @@ def get_format(diff):
             keys = ['deleted', 'added']
             values = [diff[key]['changed'][0], diff[key]['changed'][1]]
             diff[key] = dict(zip(keys, values))
-    return json.dumps(diff, indent=2, sort_keys=True)
+    return json.dumps(diff)
