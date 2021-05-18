@@ -13,34 +13,34 @@ def get_format(diff, tab=0):
                 tab,
                 STRINGS['deleted'],
                 key,
-                walk(diff[key]['deleted'], tab + 1)
+                to_string(diff[key]['deleted'], tab + 1)
             ))
         elif 'added' in diff[key].keys():
             tree.append(get_line(
                 tab,
                 STRINGS['added'],
                 key,
-                walk(diff[key]['added'], tab + 1)
+                to_string(diff[key]['added'], tab + 1)
             ))
         elif 'alike' in diff[key].keys():
             tree.append(get_line(
                 tab,
                 STRINGS['tab'],
                 key,
-                walk(diff[key]['alike'], tab + 1),
+                to_string(diff[key]['alike'], tab + 1),
             ))
         elif 'changed' in diff[key].keys():
             tree.append(get_line(
                 tab,
                 STRINGS['deleted'],
                 key,
-                walk(diff[key]['changed'][0], tab + 1),
+                to_string(diff[key]['changed'][0], tab + 1),
             ))
             tree.append(get_line(
                 tab,
                 STRINGS['added'],
                 key,
-                walk(diff[key]['changed'][1], tab + 1),
+                to_string(diff[key]['changed'][1], tab + 1),
             ))
         else:
             tree.append(get_line(
@@ -61,7 +61,7 @@ def get_line(indent, status, node, value):
     return ' '.join([line, str(value)])
 
 
-def walk(node, tab):
+def to_string(node, tab):
     values = {'True': 'true', 'False': 'false', 'None': 'null'}
     if not isinstance(node, dict):
         if str(node) in values.keys():
@@ -73,7 +73,7 @@ def walk(node, tab):
             STRINGS['tab'] * (tab + 1),
             str(key),
             ': ',
-            str(walk(
+            str(to_string(
                 node[key],
                 tab + 1,
             )),
