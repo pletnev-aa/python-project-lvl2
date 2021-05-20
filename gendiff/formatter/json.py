@@ -8,6 +8,5 @@ def get_format(diff):
             get_format(diff[key])
         elif 'changed' in diff[key]:
             keys = ['deleted', 'added']
-            values = [diff[key]['changed'][0], diff[key]['changed'][1]]
-            diff[key] = dict(zip(keys, values))
+            diff[key] = dict(zip(keys, diff[key]['changed']))
     return json.dumps(diff)
