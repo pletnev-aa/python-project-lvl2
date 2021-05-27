@@ -1,7 +1,7 @@
 import json
-
 import pytest
 from gendiff import gendiff
+from gendiff import parse
 
 
 @pytest.mark.parametrize('file1,file2,form,expected', [
@@ -75,5 +75,5 @@ def test_generate_diff(file1, file2, form, expected):
      ),
 ])
 def test_generate_diff_json(file1, file2, form, expected):
-    expected = json.loads(gendiff.read_file(expected))
+    expected = parse.get_data(expected)
     assert json.loads(gendiff.generate_diff(file1, file2, form)) == expected

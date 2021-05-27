@@ -5,7 +5,7 @@ STRINGS = {
 }
 
 
-def get_format(diff, tab=0):
+def get_stylish(diff, tab=0):
     tree = []
     for key in diff.keys():
         if 'deleted' in diff[key].keys():
@@ -47,7 +47,7 @@ def get_format(diff, tab=0):
                 tab,
                 STRINGS['tab'],
                 key,
-                get_format(diff[key]['nested'], tab + 1),
+                get_stylish(diff[key]['nested'], tab + 1),
             ))
     return '\n'.join([
         '{',

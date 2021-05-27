@@ -1,7 +1,14 @@
 import argparse
 
 
-def get_files():
+ENTITY = [
+    'file1',
+    'file2',
+    'formatter',
+]
+
+
+def get_args():
     description = 'Generate the difference between the two data structures.' \
                   ' Formation of the report in the form: plain, stylish, json'
     usage = '%(prog)s [-h] [-f FORMAT] first_file second_file'
@@ -19,4 +26,4 @@ def get_files():
     first_file = args.first_file
     second_file = args.second_file
     formatter = args.format
-    return first_file, second_file, formatter
+    return dict(zip(ENTITY, (first_file, second_file, formatter)))

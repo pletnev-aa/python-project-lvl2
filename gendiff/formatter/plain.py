@@ -7,7 +7,7 @@ STRINGS = {
 }
 
 
-def get_format(diff, path=''):
+def get_plain(diff, path=''):
     tree = []
     for key in diff.keys():
         line = key if not path else '.'.join([path, key])
@@ -35,7 +35,7 @@ def get_format(diff, path=''):
                 STRINGS['deleted'],
             ]))
         elif 'nested' in diff[key].keys():
-            tree.append(get_format(
+            tree.append(get_plain(
                 diff[key]['nested'],
                 path=format_line,
             ))
