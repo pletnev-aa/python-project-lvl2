@@ -9,4 +9,6 @@ def get_data(file):
     elif form == 'yml' or form == 'yaml':
         return yaml.safe_load(open(file))
     else:
-        raise NameError('Wrong file format. Can use only .json or .yml/.yaml files')
+        raise NameError(
+            'Wrong file format. Can use only .json or .yml/.yaml files'
+        )
