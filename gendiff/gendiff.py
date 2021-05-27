@@ -27,16 +27,13 @@ def get_diff(data1, data2):
         value1 = data1.get(key)
         value2 = data2.get(key)
         if isinstance(value1, dict) and isinstance(value2, dict):
-            value = {'nested': get_diff(value1, value2)}
+            diff[key] = {'nested': get_diff(value1, value2)}
         elif value1 == value2:
-            value = {'alike': value1}
+            diff[key] = {TYPES['alike']: value1}
         else:
-            value = {'changed': (value1, value2)}
-        diff[key] = value
+            diff[key] = {TYPES['changed']: (value1, value2)}
     for key in added_node:
-        value = {'added': data2[key]}
-        diff[key] = value
+        diff[key] = {TYPES['added']: data2[key]}
     for key in deleted_node:
-        value = {'deleted': data1[key]}
-        diff[key] = value
+        diff[key] = {TYPES['deleted']: data1[key]}
     return dict(sorted(diff.items()))
