@@ -4,8 +4,9 @@ import json
 
 def get_data(file):
     form = file.rsplit('.', 1)[-1]
-    with open(file) as data_file:
-        if form == 'json':
-            return json.load(data_file)
-        else:
-            return yaml.safe_load(data_file)
+    if form == 'json':
+        return json.load(open(file))
+    elif form == 'yml' or form == 'yaml':
+        return yaml.safe_load(open(file))
+    else:
+        raise NameError('Wrong file format. Can use only .json or .yml/.yaml files')
