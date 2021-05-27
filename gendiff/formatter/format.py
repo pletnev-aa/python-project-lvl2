@@ -10,7 +10,7 @@ FORMATS = {
 }
 
 
-def format_diff(diff, formatter):
+def get_format(diff, formatter):
     if formatter == 'json':
         return FORMATS[formatter].get_json(diff)
     elif formatter == 'plain':

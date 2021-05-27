@@ -14,7 +14,7 @@ TYPES = {
 def generate_diff(file1, file2, formatter='stylish'):
     file1, file2 = parse.get_data(file1), parse.get_data(file2)
     diff = get_diff(file1, file2)
-    return format.format_diff(diff, formatter)
+    return format.get_format(diff, formatter)
 
 
 def get_diff(data1, data2):
@@ -27,7 +27,7 @@ def get_diff(data1, data2):
         value1 = data1.get(key)
         value2 = data2.get(key)
         if isinstance(value1, dict) and isinstance(value2, dict):
-            diff[key] = {'nested': get_diff(value1, value2)}
+            diff[key] = {TYPES['nested']: get_diff(value1, value2)}
         elif value1 == value2:
             diff[key] = {TYPES['alike']: value1}
         else:
