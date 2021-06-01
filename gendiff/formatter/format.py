@@ -4,16 +4,13 @@ from gendiff.formatter import stylish
 
 
 FORMATS = {
-    'stylish': stylish,
-    'plain': plain,
-    'json': json,
+    'plain': plain.get_plain,
+    'json': json.get_json,
 }
 
 
 def get_format(diff, formatter):
-    if formatter == 'json':
-        return FORMATS[formatter].get_json(diff)
-    elif formatter == 'plain':
-        return FORMATS[formatter].get_plain(diff)
+    if formatter in FORMATS:
+        return FORMATS[formatter](diff)
     else:
-        return FORMATS[formatter].get_stylish(diff)
+        return stylish.get_stylish(diff)

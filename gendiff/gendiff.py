@@ -1,4 +1,5 @@
 from gendiff.formatter import format
+from gendiff.parse import read
 
 
 TYPES = {
@@ -10,9 +11,8 @@ TYPES = {
 }
 
 
-def generate_diff(data1, data2, formatter='stylish'):
-    diff = get_diff(data1, data2)
-    return format.get_format(diff, formatter)
+def generate_diff(data1, data2, formatter):
+    return format.get_format(get_diff(read(data1), read(data2)), formatter)
 
 
 def get_diff(data1, data2):

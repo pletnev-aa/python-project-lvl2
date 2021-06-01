@@ -47,8 +47,7 @@ from gendiff import parse
      ),
 ])
 def test_generate_diff(file1, file2, form, expected):
-    data = (file1, file2, form)
-    result = gendiff.generate_diff(**parse.get_data(data))
+    result = gendiff.generate_diff(file1, file2, form)
     with open(expected) as data:
         expected = data.read()
     assert result == expected
@@ -77,7 +76,5 @@ def test_generate_diff(file1, file2, form, expected):
      ),
 ])
 def test_generate_diff_json(file1, file2, form, expected):
-    data = (file1, file2, form)
-    result = json.loads(gendiff.generate_diff(**parse.get_data(data)))
-    expected = parse.read(expected)
-    assert result == expected
+    result = json.loads(gendiff.generate_diff(file1, file2, form))
+    assert result == parse.read(expected)

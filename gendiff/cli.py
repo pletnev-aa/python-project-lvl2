@@ -20,7 +20,9 @@ def get_args():
         help='set format of output: stylish, plain or json'
     )
     args = parser.parse_args()  # noqa: F841
-    data1 = args.first_file
-    data2 = args.second_file
-    formatter = args.format
-    return data1, data2, formatter
+    args = {
+        'data1': args.first_file,
+        'data2': args.second_file,
+        'formatter': args.format,
+    }
+    return args
