@@ -11,7 +11,7 @@ TYPES = {
 }
 
 
-def generate_diff(data1, data2, formatter):
+def generate_diff(data1, data2, formatter='stylish'):
     return format.get_format(get_diff(read(data1), read(data2)), formatter)
 
 
