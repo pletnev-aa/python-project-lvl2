@@ -1,13 +1,4 @@
-import yaml
-import json
 import argparse
-
-
-ENTITY = [
-    'file1',
-    'file2',
-    'formatter',
-]
 
 
 def get_args():
@@ -29,19 +20,7 @@ def get_args():
         help='set format of output: stylish, plain or json'
     )
     args = parser.parse_args()  # noqa: F841
-    first_file = read_arg(args.first_file)
-    second_file = read_arg(args.second_file)
+    data1 = args.first_file
+    data2 = args.second_file
     formatter = args.format
-    return dict(zip(ENTITY, (first_file, second_file, formatter)))
-
-
-def read_arg(file):
-    form = file.rsplit('.', 1)[-1]
-    if form == 'json':
-        return json.load(open(file))
-    elif form == 'yml' or form == 'yaml':
-        return yaml.safe_load(open(file))
-    else:
-        raise NameError(
-            'Wrong file format. Can use only .json or .yml/.yaml files'
-        )
+    return data1, data2, formatter
