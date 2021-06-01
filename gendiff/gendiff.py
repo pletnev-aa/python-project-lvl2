@@ -1,5 +1,4 @@
 from gendiff.formatter import format
-from gendiff import parse
 
 
 TYPES = {
@@ -12,7 +11,6 @@ TYPES = {
 
 
 def generate_diff(file1, file2, formatter='stylish'):
-    file1, file2 = parse.get_data(file1), parse.get_data(file2)
     diff = get_diff(file1, file2)
     return format.get_format(diff, formatter)
 
