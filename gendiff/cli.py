@@ -1,13 +1,8 @@
 import yaml
 import json
 import argparse
-from collections import defaultdict
 
-FILE_FORMATS = {
-    'json': 'json',
-    'yaml': 'yaml',
-    'yml': 'yaml',
-}
+
 ENTITY = [
     'file1',
     'file2',
@@ -34,28 +29,19 @@ def get_args():
         help='set format of output: stylish, plain or json'
     )
     args = parser.parse_args()  # noqa: F841
-    first_file = args.first_file
-    second_file = args.second_file
-    file_format = defaultdict(str)
-    file_format[first_file] += first_file.rsplit('.', 1)[-1]
-    file_format[second_file] += second_file.rsplit('.', 1)[-1]
-    for key in file_format:
-        if file_format[key] in FILE_FORMATS:
-            first_file = read_arg(args.first_file, file_format[key])
-            second_file = read_arg(args.second_file, file_format[key])
-        else:
-            raise ValueError(
-                'Not file format: {}. '
-                'Enter the file format: JSON, YAML, YML'.format(key)
-            )
+    first_file = read_arg(args.first_file)
+    second_file = read_arg(args.second_file)
     formatter = args.format
     return dict(zip(ENTITY, (first_file, second_file, formatter)))
 
 
-def read_arg(file, form):
+def read_arg(file):
+    form = file.rsplit('.', 1)[-1]
     if form == 'json':
-        with open(file) as data_file:
-            return json.load(data_file)
+        return json.load(open(file))
+    elif form == 'yml' or form == 'yaml':
+        return yaml.safe_load(open(file))
     else:
-        with open(file, 'r') as data_file:
-            return yaml.safe_load(data_file.read())
+        raise NameError(
+            'Wrong file format. Can use only .json or .yml/.yaml files'
+        )
