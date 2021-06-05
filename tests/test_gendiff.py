@@ -77,4 +77,4 @@ def test_generate_diff(file1, file2, form, expected):
 ])
 def test_generate_diff_json(file1, file2, form, expected):
     result = json.loads(gendiff.generate_diff(file1, file2, form))
-    assert result == parse.read(expected)
+    assert result == json.loads(parse.read_file(expected))

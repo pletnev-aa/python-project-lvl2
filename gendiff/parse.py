@@ -1,21 +1,27 @@
 import yaml
 import json
-from os import path
 
 
 FILE_FORMATS = {
-    'json': json.load,
+    'json': json.loads,
     'yaml': yaml.safe_load,
     'yml': yaml.safe_load,
 }
 
 
-def read(data):
-    data = path.abspath(data)
-    data_format = data.rsplit('.', 1)[-1]
-    if data_format in FILE_FORMATS:
-        return FILE_FORMATS[data_format](open(data))
+def get_parse(data, form):
+    if form in FILE_FORMATS:
+        return FILE_FORMATS[form](data)
     else:
         raise NameError(
             'Wrong input data format. Can use only .json or .yml/.yaml'
         )
+
+
+def read_file(filename):
+    with open(filename, 'r') as data:
+        return data.read()
+
+
+def get_format(filename):
+    return filename.rsplit('.', 1)[-1]
