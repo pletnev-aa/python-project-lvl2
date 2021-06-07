@@ -2,16 +2,16 @@ import yaml
 import json
 
 
-FILE_FORMATS = {
+FORMATS = {
     'json': json.loads,
     'yaml': yaml.safe_load,
     'yml': yaml.safe_load,
 }
 
 
-def get_parse(data, form):
-    if form in FILE_FORMATS:
-        return FILE_FORMATS[form](data)
+def parse(data, form):
+    if form in FORMATS:
+        return FORMATS[form](data)
     else:
         raise NameError(
             'Wrong input data format. Can use only .json or .yml/.yaml'
