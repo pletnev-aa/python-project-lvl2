@@ -14,7 +14,8 @@ TYPES = {
 def generate_diff(data1, data2, formatter='stylish'):
     data1 = parse(read_file(data1), get_format(data1))
     data2 = parse(read_file(data2), get_format(data2))
-    return format.get_format(get_diff(data1, data2), formatter)
+    diff = get_diff(data1, data2)
+    return format.get_format(diff, formatter)
 
 
 def get_diff(input1, input2):
