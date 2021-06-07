@@ -12,9 +12,7 @@ FORMATS = {
 def parse(data, form):
     if form in FORMATS:
         return FORMATS[form](data)
-    raise NameError(
-            'Wrong input data format. Can use only .json or .yml/.yaml'
-        )
+    raise NameError('Wrong input data format. Can use only .json or .yml/.yaml')
 
 
 def read_file(filename):
