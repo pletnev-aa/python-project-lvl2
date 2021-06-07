@@ -11,7 +11,4 @@ FORMATS = {
 
 
 def get_format(diff, formatter):
-    if formatter in FORMATS:
-        return FORMATS[formatter](diff)
-    else:
-        return FORMATS['stylish'](diff)
+    return FORMATS[formatter](diff)
