@@ -11,4 +11,6 @@ FORMATS = {
 
 
 def get_format(diff, formatter):
-    return FORMATS[formatter](diff)
+    if formatter in FORMATS:
+        return FORMATS[formatter](diff)
+    raise KeyError('Unknown output format: {}. Set format of output: {}'.format(formatter, ', '.join(FORMATS)))

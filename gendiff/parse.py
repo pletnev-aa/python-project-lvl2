@@ -12,8 +12,7 @@ FORMATS = {
 def parse(data, form):
     if form in FORMATS:
         return FORMATS[form](data)
-    else:
-        raise NameError(
+    raise NameError(
             'Wrong input data format. Can use only .json or .yml/.yaml'
         )
 
